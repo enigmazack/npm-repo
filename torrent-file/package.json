@@ -13,20 +13,20 @@
   },
   "repository" : {
     "type" : "git",
-    "url": "ssh://git@github.com/enigmaz/npm-repo.git"
+    "url": "ssh://git@github.com/enigmazack/npm-repo.git"
   },
   "keywords": [
     "torrent"
   ],
-  "author": "enigmaz",
+  "author": "enigmazack",
   "license": "MIT",
   "files": [
     "lib/**/*"
   ],
   "bugs": {
-    "url": "https://github.com/enigmaz/npm-repo/issues"
+    "url": "https://github.com/enigmazack/npm-repo/issues"
   },
-  "homepage": "https://github.com/enigmaz/npm-repo#readme",
+  "homepage": "https://github.com/enigmazack/npm-repo#readme",
   "devDependencies": {
     "@types/bencode": "^2.0.0",
     "@types/lodash": "^4.14.165",

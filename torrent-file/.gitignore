@@ -117,3 +117,6 @@ dist
 
 # tsc build
 lib/
+
+# npmrc
+.npmrc
