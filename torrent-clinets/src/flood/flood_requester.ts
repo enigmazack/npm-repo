@@ -2,7 +2,8 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse
 } from 'axios'
-import FormData, { Stream } from 'form-data'
+import { ReadStream } from 'fs'
+import FormData from 'form-data'
 import { HttpsProxyAgent } from 'https-proxy-agent'
 import {
   AddTorrentOptions,
@@ -19,7 +20,7 @@ interface FloodAddTorrentPostData {
   isBasePath: 'true' | 'false',
   start: 'true' | 'false',
   fastResume: 'true' | 'false',
-  torrents: Buffer | Stream
+  torrents: ReadStream
 }
 
 export default class FloodRequester {
@@ -185,7 +186,7 @@ export default class FloodRequester {
    * add torrent, one by one
    */
   async addTorrentFile (
-    torrentFile : Buffer | Stream,
+    torrentFile : ReadStream,
     downloadPath: string,
     options: AddTorrentOptions = {}
   ): Promise<void> {
