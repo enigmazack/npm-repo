@@ -72,11 +72,11 @@ export default class FloodDataParser {
     this.torrents = Object.keys(data.torrents)
   }
 
-  getTorrentName (hash: string) {
+  getTorrentName (hash: string): string {
     return this.data.torrents[hash].name
   }
 
-  getTorrentTracker (hash: string) {
+  getTorrentTracker (hash: string): string {
     const tracker = this.data.torrents[hash].trackerURIs
     if (tracker.length) {
       return tracker[0]
@@ -87,7 +87,7 @@ export default class FloodDataParser {
   filterTorrentsByTracker (
     trackers: string | string[],
     inTorrents?: string[]
-  ) {
+  ): string[] {
     if (typeof trackers === 'string') {
       trackers = [trackers]
     }
@@ -117,7 +117,7 @@ export default class FloodDataParser {
   filterTorrentsByTags (
     tags: string | string[],
     inTorrents?: string[]
-  ) {
+  ): string[] {
     if (typeof tags === 'string') {
       tags = [tags]
     }
@@ -140,7 +140,7 @@ export default class FloodDataParser {
   filterTorrentsByAnnounce (
     filter: string | RegExp,
     inTorrents?: string[]
-  ) {
+  ): string[] {
     if (inTorrents === undefined) {
       inTorrents = this.torrents
     }
