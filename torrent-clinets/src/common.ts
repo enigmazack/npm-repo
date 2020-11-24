@@ -3,3 +3,8 @@ export interface AddTorrentOptions {
   skipHashChecking?: boolean,
   tag?: string
 }
+
+export interface RequesterOptions {
+  timeout?: number
+  proxy?: string
+}

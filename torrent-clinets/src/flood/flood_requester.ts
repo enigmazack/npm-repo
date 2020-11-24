@@ -3,7 +3,11 @@ import axios, {
   AxiosResponse
 } from 'axios'
 import FormData, { Stream } from 'form-data'
-import { AddTorrentOptions } from '../common'
+import { HttpsProxyAgent } from 'https-proxy-agent'
+import {
+  AddTorrentOptions,
+  RequesterOptions
+} from '../common'
 import {
   FloodData,
   FloodTrafficData
@@ -24,12 +28,13 @@ export default class FloodRequester {
   passwd: string
   cookie: string
   timeout: number
+  proxy: string | undefined
 
   constructor (
     url: string,
     username: string,
     passwd: string,
-    timeout: AxiosRequestConfig['timeout'] = 10000
+    options: RequesterOptions = {}
   ) {
     if (url[url.length - 1] !== '/') {
       url += '/'
@@ -37,8 +42,9 @@ export default class FloodRequester {
     this.baseUrl = url
     this.username = username
     this.passwd = passwd
+    this.timeout = options.timeout || 10000
+    this.proxy = options.proxy
     this.cookie = ''
-    this.timeout = timeout
   }
 
   /**
@@ -66,14 +72,27 @@ export default class FloodRequester {
       headers['Content-Type'] = form.getHeaders()['content-type']
       data = form
     }
-    return await axios.request({
+    const requestConfig: AxiosRequestConfig = {
       url: this.baseUrl + path,
       method,
       data,
       withCredentials: true,
       headers,
       timeout: this.timeout
-    })
+    }
+    if (this.proxy) {
+      if (new URL(this.baseUrl).protocol === 'https:') {
+        const agent = new HttpsProxyAgent(this.proxy)
+        requestConfig.httpsAgent = agent
+      } else {
+        const proxy = new URL(this.proxy)
+        requestConfig.proxy = {
+          host: proxy.hostname,
+          port: parseInt(proxy.port)
+        }
+      }
+    }
+    return await axios.request(requestConfig)
   }
 
   /**
