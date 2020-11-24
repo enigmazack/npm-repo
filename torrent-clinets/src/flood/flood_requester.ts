@@ -12,10 +12,10 @@ import {
 interface FloodAddTorrentPostData {
   tags: string,
   destination: string,
-  isBasePath: ('true'|'false'),
-  start: ('true'|'false'),
-  fastResume: ('true'|'false'),
-  torrents: (Buffer|Stream)
+  isBasePath: 'true' | 'false',
+  start: 'true' | 'false',
+  fastResume: 'true' | 'false',
+  torrents: Buffer | Stream
 }
 
 export default class FloodRequester {
@@ -45,10 +45,10 @@ export default class FloodRequester {
    * Make http request to flood server.
    */
   private async _makeRequest (
-    method: ('get'|'post'),
+    method: 'get' | 'post',
     path: string,
     data: any = {},
-    type: ('json'|'formData') = 'json'
+    type: 'json' | 'formData' = 'json'
   ): Promise<AxiosResponse<any>> {
     const headers: AxiosRequestConfig['headers'] = {}
     if (path[0] === '/') {
@@ -107,10 +107,10 @@ export default class FloodRequester {
    * Auto auth if request is unauthorized.
    */
   private async _makeAuthRequest (
-    method: ('get'|'post'),
+    method: 'get' | 'post',
     path: string,
     data: any = {},
-    type: ('json'|'formData') = 'json'
+    type: 'json' | 'formData' = 'json'
   ): Promise<any> {
     let response: AxiosResponse<any>
     try {
@@ -166,7 +166,7 @@ export default class FloodRequester {
    * add torrent, one by one
    */
   async addTorrentFile (
-    torrentFile :(Buffer|Stream),
+    torrentFile : Buffer | Stream,
     downloadPath: string,
     options: AddTorrentOptions = {}
   ): Promise<void> {
@@ -191,7 +191,7 @@ export default class FloodRequester {
    * delete torrents
    */
   async deleteTorrents (
-    hashes: (string|string[]),
+    hashes: string | string[],
     deleteData: boolean = false
   ): Promise<void> {
     if (typeof hashes === 'string') {
