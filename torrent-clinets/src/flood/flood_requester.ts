@@ -3,7 +3,7 @@ import axios, {
   AxiosResponse
 } from 'axios'
 import FormData, { Stream } from 'form-data'
-import { AddTorrentOptions } from './interfaces'
+import { AddTorrentOptions } from '../common'
 import {
   FloodData,
   FloodTrafficData
